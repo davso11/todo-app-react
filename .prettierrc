@@ -1,0 +1,7 @@
+{
+    "semi": false,
+    "singleQuote": true,
+    "singleAttributePerLine": true,
+    "pluginSearchDirs": ["/"],
+    "plugins": ["prettier-plugin-tailwindcss"]
+}
