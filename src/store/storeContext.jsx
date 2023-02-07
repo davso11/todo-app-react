@@ -31,7 +31,7 @@ function StoreProvider({ children }) {
   }, [])
 
   const postTodo = async (todo) => {
-    const todoObj = { todo: todo, userId, todoId: null }
+    const todoObj = { todo: todo, userId }
     const resp = await fetch(`${NODE_API_BASE_URL}/api/todos`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -43,10 +43,8 @@ function StoreProvider({ children }) {
       return
     }
 
-    todoObj.todoId = resp.todoId
-
     setTodos((prev) => {
-      return [...prev, todoObj]
+      return [...prev, resp.todoObj]
     })
 
     toast.success('Tâche enregistrée.')
