@@ -8,7 +8,7 @@ function Form({ todo, onSubmit, onChange }) {
       <input
         id="todo"
         placeholder="Quelle tâche voulez-vous enregistrer ?"
-        className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+        className="block grow rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
         onChange={onChange}
         value={todo}
         required
@@ -16,7 +16,7 @@ function Form({ todo, onSubmit, onChange }) {
       <button
         color="success"
         type="submit"
-        className="mt-3 rounded-lg bg-[#14B866] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#179154] focus:outline-none focus:ring-4 focus:ring-green-300"
+        className="rounded-lg bg-[#14B866] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#179154] focus:outline-none focus:ring-4 focus:ring-green-300"
       >
         Mettre à jour
       </button>
