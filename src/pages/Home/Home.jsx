@@ -6,20 +6,8 @@ import { useEffect } from 'react'
 function Home() {
   const store = useStore()
 
-  const fetchTodos = async () => {
-    try {
-      const data = await fetch(`${store.PHP_API_BASE_URL}/api/todos/read.php`, {
-        method: 'POST',
-        body: JSON.stringify({ userId: store.userId }),
-      }).then((res) => res.json())
-      store.setTodos(data)
-    } catch (e) {
-      console.error('Fetch Todos Error : ', e)
-    }
-  }
-
   useEffect(() => {
-    fetchTodos()
+    store.fetchTodos()
   }, [])
 
   return (
