@@ -1,7 +1,7 @@
 function Form({ todo, onSubmit, onChange }) {
   return (
     <form
-      className="mt-6"
+      className="mt-6 flex flex-col gap-4 md:flex-row md:items-center"
       autoComplete="off"
       onSubmit={onSubmit}
     >

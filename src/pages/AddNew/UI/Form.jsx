@@ -1,7 +1,7 @@
 function Form({ todoRef, onSubmit }) {
   return (
     <form
-      className="mt-6"
+      className="mt-6 flex flex-col gap-4 md:flex-row md:items-center"
       autoComplete="off"
       onSubmit={onSubmit}
     >
@@ -15,7 +15,7 @@ function Form({ todoRef, onSubmit }) {
       <button
         color="success"
         type="submit"
-        className="mt-3 rounded-lg bg-[#14B866] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#179154] focus:outline-none focus:ring-4 focus:ring-green-300"
+        className="rounded-lg bg-[#14B866] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#179154] focus:outline-none focus:ring-4 focus:ring-green-300"
       >
         Confimer
       </button>
