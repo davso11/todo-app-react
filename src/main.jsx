@@ -1,4 +1,3 @@
-import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { IconContext } from 'react-icons'
@@ -16,14 +15,12 @@ const iconSetups = {
 }
 
 root.render(
-  <StrictMode>
-    <StoreProvider>
-      <IconContext.Provider value={iconSetups}>
-        <Router>
-          <App />
-          <Toaster position="bottom-right" />
-        </Router>
-      </IconContext.Provider>
-    </StoreProvider>
-  </StrictMode>
+  <StoreProvider>
+    <IconContext.Provider value={iconSetups}>
+      <Router>
+        <App />
+        <Toaster position="bottom-right" />
+      </Router>
+    </IconContext.Provider>
+  </StoreProvider>
 )
