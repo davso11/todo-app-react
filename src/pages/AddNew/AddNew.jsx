@@ -1,12 +1,14 @@
-import { Header } from '../../components/Header'
 import { useRef } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 import { useStore } from '../../store/storeContext'
+import { Header } from '../../components/Header'
+import { Form } from './UI/Form'
 
 function AddNew() {
   const todoRef = useRef()
+  const store = useStore()
   const navigate = useNavigate()
-  const { postTodo } = useStore()
 
   const submitHanlder = async (e) => {
     e.preventDefault()
@@ -15,11 +17,28 @@ function AddNew() {
     if (!todo) {
       return
     }
+
+    const todoObj = {
+      userId: store.userId,
+      todo,
+    }
+
     try {
-      await postTodo(todo)
+      const resp = await fetch(`${store.NODE_API_BASE_URL}/api/todos`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(todoObj),
+      }).then((res) => res.json())
+
+      if (!resp.ok) {
+        toast.error('Erreur survenue.')
+        return
+      }
+
+      toast.success('Tâche enregistrée.')
       navigate('/')
-    } catch {
-      console.error("Can't Post Todo")
+    } catch (e) {
+      console.error("Can't Post Todo : ", e.message)
     }
   }
 
@@ -28,29 +47,13 @@ function AddNew() {
       <Header />
       <main
         id="add-new-todo"
-        className="container mt-8 w-full"
+        className="container my-8 w-full"
       >
         <h2 className="text-xl font-bold">Ajouter une nouvelle tâche</h2>
-        <form
-          className="mt-6"
-          autoComplete="off"
-          onSubmit={(e) => submitHanlder(e, todoRef.current.value)}
-        >
-          <input
-            id="todo"
-            placeholder="Quelle tâche voulez-vous enregistrer ?"
-            className="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
-            ref={todoRef}
-            required
-          />
-          <button
-            color="success"
-            type="submit"
-            className="mt-3 rounded-lg bg-[#14B866] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#179154] focus:outline-none focus:ring-4 focus:ring-green-300"
-          >
-            Confirmer
-          </button>
-        </form>
+        <Form
+          onSubmit={submitHanlder}
+          todoRef={todoRef}
+        />
       </main>
     </>
   )

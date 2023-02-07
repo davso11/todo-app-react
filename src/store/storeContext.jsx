@@ -14,43 +14,9 @@ function StoreProvider({ children }) {
   const [PHP_API_BASE_URL] = useState(import.meta.env.VITE_PHP_API_BASE_URL)
   const [PY_API_BASE_URL] = useState(import.meta.env.VITE_PYTHON_API_BASE_URL)
 
-  const fetchTodos = async () => {
-    try {
-      const data = await fetch(`${PHP_API_BASE_URL}/api/todos/read.php`, {
-        method: 'POST',
-        body: JSON.stringify({ userId }),
-      }).then((res) => res.json())
-      setTodos(data)
-    } catch (e) {
-      console.error('Fetch Todos Error : ', e)
-    }
-  }
+  const deleteTodo = async (e, todoId) => {
+    e.stopPropagation()
 
-  useEffect(() => {
-    fetchTodos()
-  }, [])
-
-  const postTodo = async (todo) => {
-    const todoObj = { todo: todo, userId }
-    const resp = await fetch(`${NODE_API_BASE_URL}/api/todos`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(todoObj),
-    }).then((res) => res.json())
-
-    if (!resp.ok) {
-      toast.error('Erreur survenue.')
-      return
-    }
-
-    setTodos((prev) => {
-      return [...prev, resp.todoObj]
-    })
-
-    toast.success('Tâche enregistrée.')
-  }
-
-  const deleteTodo = async (todoId) => {
     const resp = await fetch(`${NODE_API_BASE_URL}/api/todos/${todoId}`, {
       method: 'DELETE',
       headers: { 'Content-Type': 'application/json' },
@@ -76,7 +42,6 @@ function StoreProvider({ children }) {
     userId,
     todos,
     setTodos,
-    postTodo,
     deleteTodo,
   }
 
