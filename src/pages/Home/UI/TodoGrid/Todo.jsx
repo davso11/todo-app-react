@@ -2,12 +2,14 @@ import { IoTrash } from 'react-icons/io5'
 import { dayjs } from '../../../../lib/dayjs'
 import { useStore } from '../../../../store/storeContext'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-hot-toast'
 
 function Todo(todoObj) {
   const { todoId, todo, updatedAt } = todoObj
   const time = dayjs(updatedAt).fromNow()
-  const { deleteTodo, userId } = useStore()
+  const store = useStore()
   const navigate = useNavigate()
+  const userId = store.userId
 
   const selectedTodo = {
     userId,
@@ -17,6 +19,34 @@ function Todo(todoObj) {
 
   const goToUpdate = () => {
     navigate(`/update/${todoId}`, { state: selectedTodo })
+  }
+
+  const deleteTodo = async (e, todoId) => {
+    e.stopPropagation()
+
+    try {
+      const resp = await fetch(
+        `${store.NODE_API_BASE_URL}/api/todos/${todoId}`,
+        {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId }),
+        }
+      )
+
+      if (!resp.ok) {
+        toast.error('Erreur survenue.')
+        return
+      }
+
+      store.setTodos((prev) => {
+        return prev.filter((todo) => todo.todoId !== todoId)
+      })
+
+      toast.success('Tâche supprimée.')
+    } catch (e) {
+      console.error("Can't Delete Todo : ", e.message)
+    }
   }
 
   return (
