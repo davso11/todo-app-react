@@ -1,5 +1,4 @@
-import { useState, createContext, useContext, useEffect } from 'react'
-import { toast } from 'react-hot-toast'
+import { useState, createContext, useContext } from 'react'
 
 const StoreContext = createContext()
 
@@ -14,27 +13,6 @@ function StoreProvider({ children }) {
   const [PHP_API_BASE_URL] = useState(import.meta.env.VITE_PHP_API_BASE_URL)
   const [PY_API_BASE_URL] = useState(import.meta.env.VITE_PYTHON_API_BASE_URL)
 
-  const deleteTodo = async (e, todoId) => {
-    e.stopPropagation()
-
-    const resp = await fetch(`${NODE_API_BASE_URL}/api/todos/${todoId}`, {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ userId }),
-    })
-
-    if (!resp.ok) {
-      toast.error('Erreur survenue.')
-      return
-    }
-
-    setTodos((prev) => {
-      return prev.filter((todo) => todo.todoId !== todoId)
-    })
-
-    toast.success('Tâche supprimée.')
-  }
-
   const toShare = {
     NODE_API_BASE_URL,
     PHP_API_BASE_URL,
@@ -42,7 +20,6 @@ function StoreProvider({ children }) {
     userId,
     todos,
     setTodos,
-    deleteTodo,
   }
 
   return (
