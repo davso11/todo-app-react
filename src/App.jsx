@@ -2,6 +2,7 @@ import { Routes, Route } from 'react-router-dom'
 import { Home } from './pages/Home'
 import { AddNew } from './pages/AddNew'
 import { Update } from './pages/Update'
+import { Stats } from './pages/Stats'
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
       <Route
         path="/update/:todoId"
         element={<Update />}
+      />
+      <Route
+        path="/stats"
+        element={<Stats />}
       />
     </Routes>
   )
