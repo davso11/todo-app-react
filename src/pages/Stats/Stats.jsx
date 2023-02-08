@@ -45,9 +45,7 @@ function Stats() {
               <Chart stats={stats} />
             </div>
             <h3 className="mt-20 mb-8 font-semibold">Tableau</h3>
-            <div className="">
-              <Table data={store.todos} />
-            </div>
+            <Table data={store.todos} />
           </>
         ) : (
           <p className="mt-8">Indisponible</p>
