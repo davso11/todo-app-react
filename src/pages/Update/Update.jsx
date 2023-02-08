@@ -9,10 +9,15 @@ function Update() {
   const navigate = useNavigate()
   const { state: selectedTodo } = useLocation()
   const [todo, setTodo] = useState(selectedTodo.todo)
+  const [isImportant, setIsImportant] = useState(selectedTodo.isImportant)
   const store = useStore()
 
   const changeHandler = (e) => {
     setTodo(e.target.value)
+  }
+
+  const checkHandler = (e) => {
+    setIsImportant(e.target.checked)
   }
 
   const submitHanlder = async (e) => {
@@ -24,6 +29,7 @@ function Update() {
 
     const newTodo = {
       ...selectedTodo,
+      isImportant,
       todo,
     }
 
@@ -41,7 +47,7 @@ function Update() {
         return
       }
 
-      toast.success('Tâche Modifiée.')
+      toast.success('Tâche modifiée.')
       navigate('/')
     } catch (e) {
       console.error("Can't Modify Todo : ", e.message)
@@ -59,6 +65,8 @@ function Update() {
         <Form
           onSubmit={submitHanlder}
           onChange={changeHandler}
+          onCheck={checkHandler}
+          isImportant={isImportant}
           todo={todo}
         />
       </main>

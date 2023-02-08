@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { useStore } from '../../store/storeContext'
@@ -9,6 +9,11 @@ function AddNew() {
   const todoRef = useRef()
   const store = useStore()
   const navigate = useNavigate()
+  const [isImportant, setIsImportant] = useState(false)
+
+  const checkHandler = (e) => {
+    setIsImportant(e.target.checked)
+  }
 
   const submitHanlder = async (e) => {
     e.preventDefault()
@@ -20,6 +25,7 @@ function AddNew() {
 
     const todoObj = {
       userId: store.userId,
+      isImportant,
       todo,
     }
 
@@ -52,6 +58,8 @@ function AddNew() {
         <h2 className="text-xl font-bold">Ajouter une nouvelle tâche</h2>
         <Form
           onSubmit={submitHanlder}
+          onCheck={checkHandler}
+          isImportant={isImportant}
           todoRef={todoRef}
         />
       </main>
