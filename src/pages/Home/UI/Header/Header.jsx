@@ -15,7 +15,12 @@ function Header() {
   return (
     <header className="container w-full py-3">
       <div className="flex items-center justify-between gap-10">
-        <h1 className="text-2xl font-bold">TodoList</h1>
+        <h1
+          className="cursor-pointer text-2xl font-bold"
+          onClick={() => navigate('/')}
+        >
+          TodoList
+        </h1>
         <div className="flex gap-3">
           <MenuButton
             onNew={goToAddNew}
