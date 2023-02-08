@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,typography,aspect-ratio,line-clamp"></script>
+  </head>
+  <body>
+    <div class="container mx-auto px-4 md:max-w-2xl">
+      <header class="container w-full py-3">
+        <div class="flex items-center justify-between gap-10">
+          <h1 class="cursor-pointer text-2xl font-bold">TodoList</h1>
+          <div class="flex gap-3">
+            <a
+              role="button"
+              href="/"
+              class="rounded-lg bg-blue-700 px-5 !py-[0.625rem] text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300"
+            >
+              <span>Retour</span>
+            </a>
+          </div>
+        </div>
+      </header>
+
+      <main class="container">
+        <h2 class="mb-6 mt-8 text-xl font-bold">
+          Ajouter une nouvelle tâche -
+          <span class="text-blue-600">sans AJAX (HTTP Natif)</span>
+        </h2>
+
+        <form
+          id="add-form"
+          method="POST"
+          action="http://localhost:9200/api/todos"
+          enctype="application/x-www-form-urlencoded"
+          autocomplete="off"
+          class="mt-6 flex flex-col"
+        >
+          <div class="mb-6">
+            <label
+              for="todo"
+              class="mb-2 block text-sm font-medium text-gray-900"
+              >Tâche</label
+            >
+            <input
+              type="text"
+              id="todo"
+              name="todo"
+              class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+              placeholder="Quelle tâche voulez-vous enregistrer ?"
+            />
+          </div>
+          <div class="mb-6">
+            <label
+              for="userId"
+              class="mb-2 block text-sm font-medium text-gray-900"
+              >Utilisateur</label
+            >
+            <select
+              id="userId"
+              name="userId"
+              class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+            >
+              <option
+                selected
+                value="6dd81adb-e0e8-4115-a014-0c7760a362bc"
+              >
+                Yao Kan Jean Christian
+              </option>
+            </select>
+          </div>
+          <div class="mb-6 flex items-start">
+            <div class="flex h-5 items-center">
+              <input
+                id="isImportant"
+                name="isImportant"
+                type="checkbox"
+                value="1"
+                class="focus:ring-3 h-4 w-4 rounded border border-gray-300 bg-gray-50 focus:ring-blue-300"
+              />
+            </div>
+            <label
+              for="isImportant"
+              class="ml-2 text-sm text-gray-900"
+              >Tâche importante</label
+            >
+          </div>
+          <button
+            id="submit"
+            type="submit"
+            class="w-full rounded-lg bg-blue-700 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 sm:w-auto md:self-start"
+          >
+            Confirmer
+          </button>
+        </form>
+      </main>
+    </div>
+  </body>
+</html>
