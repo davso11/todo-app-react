@@ -5,13 +5,13 @@ ChartJS.register(ArcElement, Tooltip, Legend)
 
 function Chart({ stats }) {
   const data = {
-    labels: ['En cours', 'Terminées'],
+    labels: ['Normale', 'Importante'],
     datasets: [
       {
         label: 'Tâches',
-        data: stats,
-        backgroundColor: ['#0466c8', '#02c39a'],
-        borderColor: ['#0466c8', '#02c39a'],
+        data: stats.reverse(),
+        backgroundColor: ['#0466c8', '#ffc300'],
+        borderColor: ['#0466c8', '#ffc300'],
         borderWidth: 0,
       },
     ],
