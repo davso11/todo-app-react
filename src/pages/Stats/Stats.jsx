@@ -35,7 +35,7 @@ function Stats() {
       <Header />
       <main
         id="home"
-        className="container my-8 w-full"
+        className="container mt-8 mb-40 w-full"
       >
         <h2 className="text-xl font-bold">Statistiques</h2>
         <h3 className="my-8 font-semibold">Diagramme</h3>

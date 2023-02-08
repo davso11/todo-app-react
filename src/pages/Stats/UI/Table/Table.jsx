@@ -1,9 +1,11 @@
 import { useState } from 'react'
+import { useStore } from '../../../../store/storeContext'
 import { FilterBar } from './FilterBar'
 
 function Table({ data }) {
   const [selectedValue, setSelectedValue] = useState('all')
   const [tabData, setTabData] = useState(data)
+  const store = useStore()
 
   const handleChange = (e) => {
     setSelectedValue(e.target.value)
@@ -13,13 +15,21 @@ function Table({ data }) {
     e.preventDefault()
 
     if (selectedValue === 'all') {
-      setSelectedValue(data)
+      setTabData(store.todos)
       return
     }
 
     try {
-      // ...
-      alert('Fonctionnalité en cours de réalisation...')
+      const filterResp = await fetch(
+        `${store.NODE_API_BASE_URL}/api/todos/status`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ userId: store.userId, status: selectedValue }),
+        }
+      ).then((res) => res.json())
+
+      setTabData(filterResp.result)
     } catch (e) {
       console.log('Cannot Filter Todos ', e.message)
     }
