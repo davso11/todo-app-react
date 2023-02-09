@@ -38,9 +38,9 @@ function Stats() {
         className="container mt-8 mb-40 w-full"
       >
         <h2 className="text-xl font-bold">Statistiques</h2>
-        <h3 className="my-8 font-semibold">Diagramme</h3>
         {stats && stats.length > 0 ? (
           <>
+            <h3 className="my-8 font-semibold">Diagramme</h3>
             <div className="mx-auto my-4 aspect-square max-w-md">
               <Chart stats={stats} />
             </div>

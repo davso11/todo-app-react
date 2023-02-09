@@ -36,7 +36,7 @@ function Form({ todoRef, isImportant, onCheck, onSubmit }) {
         type="submit"
         className="rounded-lg bg-[#14B866] px-5 py-2.5 text-sm font-medium text-white hover:bg-[#179154] focus:outline-none focus:ring-4 focus:ring-green-300 md:self-start"
       >
-        Mettre à jour
+        Confirmer
       </button>
     </form>
   )

@@ -10,7 +10,7 @@ function StoreProvider({ children }) {
   const [todos, setTodos] = useState(null)
   const [userId, setUserId] = useState('6dd81adb-e0e8-4115-a014-0c7760a362bc')
   const [NODE_API_BASE_URL] = useState(import.meta.env.VITE_NODE_API_BASE_URL)
-  const [PHP_API_BASE_URL] = useState(import.meta.env.VITE_PHP_API_BASE_URL)
+  const [PHP_API_BASE_URL] = useState('http://192.168.252.203:9201')
   const [PY_API_BASE_URL] = useState(import.meta.env.VITE_PYTHON_API_BASE_URL)
 
   const fetchTodos = async () => {

@@ -1,12 +1,9 @@
 import { useState } from 'react'
-import { useStore } from '../../../../store/storeContext'
 import { FilterBar } from './FilterBar'
 
 function Table({ data }) {
   const [selectedValue, setSelectedValue] = useState('all')
   const [tabData, setTabData] = useState(data)
-  const store = useStore()
-
   const handleChange = (e) => {
     setSelectedValue(e.target.value)
   }
@@ -15,25 +12,28 @@ function Table({ data }) {
     e.preventDefault()
 
     if (selectedValue === 'all') {
-      setTabData(store.todos)
+      setTabData(data)
       return
     }
 
-    try {
-      const filterResp = await fetch(
-        `${store.NODE_API_BASE_URL}/api/todos/status`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ userId: store.userId, status: selectedValue }),
-        }
-      ).then((res) => res.json())
+    if (selectedValue === '0') {
+      setTabData(
+        data.filter((todo) => {
+          return todo.isImportant === 0
+        })
+      )
+      return
+    }
 
-      setTabData(filterResp.result)
-    } catch (e) {
-      console.log('Cannot Filter Todos ', e.message)
+    if (selectedValue === '1') {
+      setTabData(
+        data.filter((todo) => {
+          return todo.isImportant === 1
+        })
+      )
     }
   }
+
   return (
     <div>
       <FilterBar
@@ -76,7 +76,7 @@ function Table({ data }) {
                     scope="row"
                     className="whitespace-nowrap px-6 py-4 font-medium text-gray-900"
                   >
-                    {i}
+                    {++i}
                   </th>
                   <td className="px-6 py-4">{item.todo}</td>
                   <td className="px-6 py-4 text-xs font-medium">
